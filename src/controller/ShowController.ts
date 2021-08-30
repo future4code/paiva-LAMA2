@@ -12,12 +12,12 @@ export class ShowController {
     async createShow(req: Request, res: Response){
         
         try{
-            const weekDay = Show.toWeekDayEnum(req.body.weekDay)
+            const weekDay = Show.toWeekDayEnum(req.body.weekDay as string) 
             const input: ShowInputDTO = {
                 weekDay,
-                bandId: req.body.bandId,
-                startTime: req.body.startTime,
-                endTime: req.body.endTIme
+                bandId: req.body.bandId as string,
+                startTime: Number(req.body.startTime as string),
+                endTime: Number(req.body.endTime as string)
             }
 
             const showBusiness = new ShowBusiness(
