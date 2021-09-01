@@ -49,25 +49,19 @@ export class Show {
         this.endTime = endTime
     }
 
-    public static toWeekDayEnum(data?: any): WeekDay{
-        switch(data){
-            case "FRIDAY":{
+    public static toWeekDayEnum(data: string): WeekDay {
+        switch (data) {
+            case "FRIDAY":
                 return WeekDay.FRIDAY
-            }
-            
-            case "SATURDAY":{
+            case "SATURDAY":
                 return WeekDay.SATURDAY
-            }
-
-            case "SUNDAY":{
+            case "SUNDAY":
                 return WeekDay.SUNDAY
-            }
-            
-            default:{
-                throw new InvalidInputErro("Invalid weekDay")
-            }
+            default:
+                throw new Error("Invalid weekDay")
         }
     }
+
 
     public static toShow(data?: any){
         return(data && new Show(
@@ -78,7 +72,6 @@ export class Show {
             data.endTime || data.end_time
         ))
     }
-
 }
 
 export enum WeekDay {

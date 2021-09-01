@@ -22,12 +22,12 @@ export class ShowBusiness {
         if(tokenData.role !== UserRole.ADMIN){
             throw new UnauthorizedError("Only admins can access this feature")
         }
-
+        console.log(input)
         if(!input.bandId || !input.weekDay || !input.startTime || !input.endTime ){
             throw new InvalidInputErro("Invalid input to createShow")
         }
 
-        if(input.startTime > 8 || input.endTime < 23 || input.startTime >= input.endTime){
+        if(input.startTime < 8 || input.endTime > 23 || input.startTime >= input.endTime){
             throw new InvalidInputErro("Invalid time to createShow")
         }
 

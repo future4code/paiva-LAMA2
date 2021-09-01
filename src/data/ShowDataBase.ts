@@ -24,17 +24,10 @@ export class ShowDataBase extends BaseDatabase{
     ): Promise<ShowOutputDTO[]>{
 
         const shows = await this.getConnection()
-        .raw(`
-        SELECT from show.id as id,
-            show.start_time as startTime,
-            show.end_time as endTime,
-            show.week_day as weekDay
-        FROM ${ShowDataBase.TABLE_NAME} show
-        WHERE show.week_day = "${weekDay}"
-        AND WHERE show.start_time <= "${endTime}"
-        AND WHERE show.end_time >= "${startTime}"
-        ORDER BY startTime ASC
-        `)
+        .select("*")
+        .where("end_time", ">", `${startTime}`)
+        .andWhere("start_time","<",`${endTime}`)
+        .from(ShowDataBase.TABLE_NAME)
 
         return shows.map((show: any) => {
             return{
